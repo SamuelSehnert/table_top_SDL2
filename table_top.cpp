@@ -17,10 +17,8 @@ int main(){
 
     create_window(SCREEN_WIDTH, SCREEN_HEIGHT);
     create_renderer();
-
     create_texture(player.get_player_icon(), player.get_player_color());
 
-    //Testing purposes
     while (!quit){
         SDL_PollEvent(&event);
         if (event.type == SDL_QUIT){ //SDL quit includes DWM : alt, shift, c
@@ -29,18 +27,20 @@ int main(){
         else if (event.type == SDL_KEYDOWN){
             SDL_Keycode key_code = event.key.keysym.sym;
             if (key_code == SDLK_w){
-                //rect.y -= SCREEN_HEIGHT / MOVE_SIZE;
+                player.set_player_pos(player.get_player_pos().x, player.get_player_pos().y - 10);
             }
             if (key_code == SDLK_a){
-                //rect.x -= SCREEN_WIDTH / MOVE_SIZE;
+                player.set_player_pos(player.get_player_pos().x - 10, player.get_player_pos().y);
             }
             if (key_code == SDLK_s){
-                //rect.y += SCREEN_HEIGHT / MOVE_SIZE;
+                player.set_player_pos(player.get_player_pos().x, player.get_player_pos().y + 10);
             }
             if (key_code == SDLK_d){
-                //rect.x += SCREEN_WIDTH / MOVE_SIZE;
+                player.set_player_pos(player.get_player_pos().x + 10, player.get_player_pos().y);
             }
         }
+        clear_render();
+        add_player_data_to_render(player.get_player_pos());
         display_rendered_data();
     }
     close_everything();

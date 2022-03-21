@@ -50,15 +50,25 @@ void create_renderer(){
 }
 
 void create_texture(const char icon, SDL_Color color){
-    SDL_Surface* surfaceText = TTF_RenderText_Solid(font, &icon, color);
+    char SDL_icon[2];
+    SDL_icon[0] = icon; 
+    SDL_icon[1] = '\0'; 
+
+    SDL_Surface* surfaceText = TTF_RenderText_Solid(font, (const char*)SDL_icon, color);
     texture = SDL_CreateTextureFromSurface(renderer, surfaceText);
     SDL_FreeSurface(surfaceText);
 }
 
-void display_rendered_data(){
-    SDL_SetRenderDrawColor(renderer, 255, 0,0, SDL_ALPHA_OPAQUE);
+void clear_render(){
+    SDL_SetRenderDrawColor(renderer, 0, 0,0, SDL_ALPHA_OPAQUE);
     SDL_RenderClear(renderer);
-    SDL_RenderCopy(renderer, texture, NULL, &char_rect);
+}
+
+void add_player_data_to_render(SDL_Rect player_position){
+    SDL_RenderCopy(renderer, texture, NULL, &player_position);
+}
+
+void display_rendered_data(){
     SDL_RenderPresent(renderer);
 }
 
