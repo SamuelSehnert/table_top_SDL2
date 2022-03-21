@@ -17,7 +17,7 @@ void initialize_SDL(){
 }
 
 void initialize_font(){
-    font = TTF_OpenFont("./fonts/8bitoperator_JVE_Regular.ttf", 32);
+    font = TTF_OpenFont("./fonts/8bitoperator_JVE_Regular.ttf", ICON_UNIT_SIZE);
     if (font == nullptr){
         std::cout << "Error loading Font: " << TTF_GetError() << std::endl;
         exit(1);
@@ -86,10 +86,10 @@ void close_everything(){
 
 void print_grid(int max_width, int max_height){
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
-    for (int i = 32; i < max_width; i += 32){
+    for (int i = ICON_UNIT_SIZE; i < max_width; i += ICON_UNIT_SIZE){
         SDL_RenderDrawLine(renderer, i, 0, i, max_height);
     }
-    for (int i = 32; i < max_height; i += 32){
+    for (int i = ICON_UNIT_SIZE; i < max_height; i += ICON_UNIT_SIZE){
         SDL_RenderDrawLine(renderer, 0, i, max_width, i);
     }
 }

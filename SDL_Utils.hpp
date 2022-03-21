@@ -3,6 +3,8 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 
+#include "shared.hpp"
+
 #define SCREEN_NAME "Table Top"
 
 void initialize_SDL();
