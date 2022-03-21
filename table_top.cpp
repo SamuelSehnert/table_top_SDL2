@@ -26,16 +26,16 @@ int main(){
         }
         else if (event.type == SDL_KEYDOWN){
             SDL_Keycode key_code = event.key.keysym.sym;
-            if (key_code == SDLK_w){
+            if (key_code == SDLK_w && player.get_player_pos().y - 32 >= 0){
                 player.set_player_pos(player.get_player_pos().x, player.get_player_pos().y - 32);
             }
-            if (key_code == SDLK_a){
+            if (key_code == SDLK_a && player.get_player_pos().x - 32 >= 0){
                 player.set_player_pos(player.get_player_pos().x - 32, player.get_player_pos().y);
             }
-            if (key_code == SDLK_s){
+            if (key_code == SDLK_s && player.get_player_pos().y + 32 < SCREEN_HEIGHT){
                 player.set_player_pos(player.get_player_pos().x, player.get_player_pos().y + 32);
             }
-            if (key_code == SDLK_d){
+            if (key_code == SDLK_d && player.get_player_pos().x + 32 < SCREEN_WIDTH){
                 player.set_player_pos(player.get_player_pos().x + 32, player.get_player_pos().y);
             }
         }
