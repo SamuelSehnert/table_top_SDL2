@@ -3,7 +3,7 @@
 Player::Player(SDL_Rect initial_pos, SDL_Color initial_color){
     this->player_pos = initial_pos;
     this->icon_color = initial_color;
-    this->player_icon = 'B';
+    this->player_icon = '@';
 }
 
 //Getters
@@ -16,3 +16,5 @@ void Player::set_player_pos(int x, int y){
     this->player_pos.x = x;
     this->player_pos.y = y;
 }
+
+//SDL

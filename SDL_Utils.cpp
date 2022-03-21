@@ -60,12 +60,18 @@ void create_texture(const char icon, SDL_Color color){
 }
 
 void clear_render(){
-    SDL_SetRenderDrawColor(renderer, 0, 0,0, SDL_ALPHA_OPAQUE);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
     SDL_RenderClear(renderer);
 }
 
 void add_player_data_to_render(SDL_Rect player_position){
-    SDL_RenderCopy(renderer, texture, NULL, &player_position);
+    //We shift the position so that the Icon is in the middle of the grid
+    SDL_Rect shifted_position;
+    shifted_position.h = player_position.h;
+    shifted_position.w = player_position.w;
+    shifted_position.x = player_position.x + 3;
+    shifted_position.y = player_position.y;
+    SDL_RenderCopy(renderer, texture, NULL, &shifted_position);
 }
 
 void display_rendered_data(){
@@ -80,4 +86,13 @@ void close_everything(){
     SDL_Quit();
 }
 
+void print_grid(int max_width, int max_height){
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
+    for (int i = 32; i < max_width; i += 32){
+        SDL_RenderDrawLine(renderer, i, 0, i, max_width);
+    }
+    for (int i = 32; i < max_height; i += 32){
+        SDL_RenderDrawLine(renderer, 0, i, max_width, i);
+    }
+}
 

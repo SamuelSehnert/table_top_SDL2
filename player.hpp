@@ -18,4 +18,6 @@ class Player{
 
         //Setters
         void set_player_pos(int x, int y);
+
+        //SDL
 };

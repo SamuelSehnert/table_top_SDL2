@@ -27,20 +27,21 @@ int main(){
         else if (event.type == SDL_KEYDOWN){
             SDL_Keycode key_code = event.key.keysym.sym;
             if (key_code == SDLK_w){
-                player.set_player_pos(player.get_player_pos().x, player.get_player_pos().y - 10);
+                player.set_player_pos(player.get_player_pos().x, player.get_player_pos().y - 32);
             }
             if (key_code == SDLK_a){
-                player.set_player_pos(player.get_player_pos().x - 10, player.get_player_pos().y);
+                player.set_player_pos(player.get_player_pos().x - 32, player.get_player_pos().y);
             }
             if (key_code == SDLK_s){
-                player.set_player_pos(player.get_player_pos().x, player.get_player_pos().y + 10);
+                player.set_player_pos(player.get_player_pos().x, player.get_player_pos().y + 32);
             }
             if (key_code == SDLK_d){
-                player.set_player_pos(player.get_player_pos().x + 10, player.get_player_pos().y);
+                player.set_player_pos(player.get_player_pos().x + 32, player.get_player_pos().y);
             }
         }
         clear_render();
         add_player_data_to_render(player.get_player_pos());
+        print_grid(SCREEN_WIDTH, SCREEN_HEIGHT);
         display_rendered_data();
     }
     close_everything();
