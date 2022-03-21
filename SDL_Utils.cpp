@@ -5,8 +5,6 @@ SDL_Renderer* renderer = nullptr;
 SDL_Texture* texture = nullptr;
 TTF_Font* font = nullptr;
 
-SDL_Rect char_rect = {0,0,32,32};
-
 void initialize_SDL(){
     if (SDL_Init(SDL_INIT_VIDEO) < 0){
         std::cout << "Error in the init phase: " << SDL_GetError() << std::endl;
@@ -89,7 +87,7 @@ void close_everything(){
 void print_grid(int max_width, int max_height){
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
     for (int i = 32; i < max_width; i += 32){
-        SDL_RenderDrawLine(renderer, i, 0, i, max_width);
+        SDL_RenderDrawLine(renderer, i, 0, i, max_height);
     }
     for (int i = 32; i < max_height; i += 32){
         SDL_RenderDrawLine(renderer, 0, i, max_width, i);

@@ -5,6 +5,12 @@
 
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 480
+
+//#define BOARD_WIDTH 32 * 20
+#define BOARD_WIDTH 32 * 15
+//#define BOARD_HEIGHT 32 * 10
+#define BOARD_HEIGHT 32 * 15
+
 #define MOVE_SIZE 20;
 
 int main(){
@@ -32,16 +38,17 @@ int main(){
             if (key_code == SDLK_a && player.get_player_pos().x - 32 >= 0){
                 player.set_player_pos(player.get_player_pos().x - 32, player.get_player_pos().y);
             }
-            if (key_code == SDLK_s && player.get_player_pos().y + 32 < SCREEN_HEIGHT){
+            if (key_code == SDLK_s && player.get_player_pos().y + 32 < BOARD_HEIGHT){
                 player.set_player_pos(player.get_player_pos().x, player.get_player_pos().y + 32);
             }
-            if (key_code == SDLK_d && player.get_player_pos().x + 32 < SCREEN_WIDTH){
+            if (key_code == SDLK_d && player.get_player_pos().x + 32 < BOARD_WIDTH){
                 player.set_player_pos(player.get_player_pos().x + 32, player.get_player_pos().y);
             }
         }
         clear_render();
         add_player_data_to_render(player.get_player_pos());
-        print_grid(SCREEN_WIDTH, SCREEN_HEIGHT);
+        //print_grid(SCREEN_WIDTH, SCREEN_HEIGHT);
+        print_grid(BOARD_WIDTH, BOARD_HEIGHT);
         display_rendered_data();
     }
     close_everything();
