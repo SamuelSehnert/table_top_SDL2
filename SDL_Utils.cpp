@@ -2,7 +2,6 @@
 
 SDL_Window* window = nullptr;
 SDL_Renderer* renderer = nullptr;
-SDL_Texture* texture = nullptr;
 TTF_Font* font = nullptr;
 
 void initialize_SDL(){
@@ -47,29 +46,9 @@ void create_renderer(){
     }
 }
 
-void create_texture(const char icon, SDL_Color color){
-    char SDL_icon[2];
-    SDL_icon[0] = icon; 
-    SDL_icon[1] = '\0'; 
-
-    SDL_Surface* surfaceText = TTF_RenderText_Solid(font, (const char*)SDL_icon, color);
-    texture = SDL_CreateTextureFromSurface(renderer, surfaceText);
-    SDL_FreeSurface(surfaceText);
-}
-
 void clear_render(){
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
     SDL_RenderClear(renderer);
-}
-
-void add_player_data_to_render(SDL_Rect player_position){
-    //We shift the position so that the Icon is in the middle of the grid
-    SDL_Rect shifted_position;
-    shifted_position.h = player_position.h;
-    shifted_position.w = player_position.w;
-    shifted_position.x = player_position.x + 3;
-    shifted_position.y = player_position.y;
-    SDL_RenderCopy(renderer, texture, NULL, &shifted_position);
 }
 
 void display_rendered_data(){
@@ -79,7 +58,6 @@ void display_rendered_data(){
 
 void close_everything(){
     TTF_CloseFont(font);
-    SDL_DestroyTexture(texture);
     SDL_DestroyWindow(window);
     SDL_Quit();
 }
@@ -94,3 +72,10 @@ void print_grid(int max_width, int max_height){
     }
 }
 
+TTF_Font* get_font(){
+    return font;
+}
+
+SDL_Renderer* get_renderer(){
+    return renderer;
+}

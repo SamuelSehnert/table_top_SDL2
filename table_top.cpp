@@ -13,14 +13,15 @@
 int main(){
     bool quit = false;
     SDL_Event event;
-    Piece player({0,0, ICON_UNIT_SIZE, ICON_UNIT_SIZE}, {255, 0,0,SDL_ALPHA_OPAQUE});
 
     initialize_SDL();
     initialize_font();
 
     create_window(SCREEN_WIDTH, SCREEN_HEIGHT);
     create_renderer();
-    create_texture(player.get_piece_icon(), player.get_piece_color());
+
+    Piece player({0,0, ICON_UNIT_SIZE, ICON_UNIT_SIZE}, {255, 0,0,SDL_ALPHA_OPAQUE}, '@');
+    Piece enemy({32,0, ICON_UNIT_SIZE, ICON_UNIT_SIZE}, {255, 0,0,SDL_ALPHA_OPAQUE}, 'T');
 
     while (!quit){
         SDL_PollEvent(&event);
@@ -43,11 +44,14 @@ int main(){
             }
         }
         clear_render();
-        add_player_data_to_render(player.get_piece_pos());
+        player.add_to_render();
+        enemy.add_to_render();
         print_grid(BOARD_WIDTH, BOARD_HEIGHT);
         display_rendered_data();
     }
     close_everything();
+    player.close_texture();
+    enemy.close_texture();
     return 0;
 }
 

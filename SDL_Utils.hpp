@@ -17,3 +17,6 @@ void add_player_data_to_render(SDL_Rect player_position);
 void display_rendered_data();
 void close_everything();
 void print_grid(int max_width, int max_height);
+
+TTF_Font* get_font();
+SDL_Renderer* get_renderer();
