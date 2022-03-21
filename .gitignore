@@ -1,2 +1,5 @@
+#Ignore the exe
 table_top
+
+#Ignore the object files
 *.o
