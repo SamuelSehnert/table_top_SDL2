@@ -1,4 +1,4 @@
-#include "player.hpp"
+#include "pieces.hpp"
 
 Player::Player(SDL_Rect initial_pos, SDL_Color initial_color){
     this->player_pos = initial_pos;

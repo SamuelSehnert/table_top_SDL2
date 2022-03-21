@@ -4,8 +4,8 @@ CC     = g++
 CFLAGS = -Wall -Wextra -g
 LIBS   += -lSDL2 -lSDL2main -lSDL2_ttf
 
-SRC    = SDL_Utils.cpp player.cpp
-OBJS   = SDL_Utils.o   player.o
+SRC    = SDL_Utils.cpp pieces.cpp
+OBJS   = SDL_Utils.o   pieces.o
 
 all: table_top
 

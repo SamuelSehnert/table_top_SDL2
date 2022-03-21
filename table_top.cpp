@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "SDL_Utils.hpp"
-#include "player.hpp"
+#include "pieces.hpp"
 
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 480
@@ -11,7 +11,7 @@
 //#define BOARD_HEIGHT 32 * 10
 #define BOARD_HEIGHT 32 * 15
 
-#define MOVE_SIZE 20;
+#define BOARD_UNIT_SIZE 32;
 
 int main(){
     bool quit = false;
@@ -47,7 +47,6 @@ int main(){
         }
         clear_render();
         add_player_data_to_render(player.get_player_pos());
-        //print_grid(SCREEN_WIDTH, SCREEN_HEIGHT);
         print_grid(BOARD_WIDTH, BOARD_HEIGHT);
         display_rendered_data();
     }
