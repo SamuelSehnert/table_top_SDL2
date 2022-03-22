@@ -7,8 +7,8 @@
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 480
 
-#define BOARD_WIDTH ICON_UNIT_SIZE * 15
-#define BOARD_HEIGHT ICON_UNIT_SIZE * 15
+#define BOARD_WIDTH ICON_UNIT_SIZE * 30
+#define BOARD_HEIGHT ICON_UNIT_SIZE * 30
 
 int main(){
     bool quit = false;
@@ -44,9 +44,10 @@ int main(){
             }
         }
         clear_render();
+        show_floor(BOARD_WIDTH, BOARD_HEIGHT);
         player.add_to_render();
         enemy.add_to_render();
-        print_grid(BOARD_WIDTH, BOARD_HEIGHT);
+        //print_grid(BOARD_WIDTH, BOARD_HEIGHT);
         display_rendered_data();
     }
     close_everything();

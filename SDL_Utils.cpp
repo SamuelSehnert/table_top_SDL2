@@ -4,6 +4,10 @@ SDL_Window* window = nullptr;
 SDL_Renderer* renderer = nullptr;
 TTF_Font* font = nullptr;
 
+//Getters
+TTF_Font* get_font(){ return font; }
+SDL_Renderer* get_renderer(){ return renderer; }
+
 void initialize_SDL(){
     if (SDL_Init(SDL_INIT_VIDEO) < 0){
         std::cout << "Error in the init phase: " << SDL_GetError() << std::endl;
@@ -16,7 +20,7 @@ void initialize_SDL(){
 }
 
 void initialize_font(){
-    font = TTF_OpenFont("./fonts/8bitoperator_JVE_Regular.ttf", ICON_UNIT_SIZE);
+    font = TTF_OpenFont("./fonts/Perfect_DOS_VGA_437_Win.ttf", ICON_UNIT_SIZE);
     if (font == nullptr){
         std::cout << "Error loading Font: " << TTF_GetError() << std::endl;
         exit(1);
@@ -72,10 +76,25 @@ void print_grid(int max_width, int max_height){
     }
 }
 
-TTF_Font* get_font(){
-    return font;
+void show_floor(int max_width, int max_height){
+    const char ch[2] = {'.', '\0'};
+    SDL_Surface* floor_text = TTF_RenderText_Solid(font, (const char*)ch, {255,255,255,255}); 
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, floor_text);
+    SDL_FreeSurface(floor_text);
+
+    SDL_Rect current_pos;
+    current_pos.h = current_pos.w = ICON_UNIT_SIZE;
+    current_pos.x = 3;
+    current_pos.y = 0;
+
+    for (int i = 0; i < max_height; i += ICON_UNIT_SIZE){
+        for (int j = 0; j < max_width; j += ICON_UNIT_SIZE){
+            SDL_RenderCopy(get_renderer(), texture, NULL, &current_pos);
+            current_pos.x += ICON_UNIT_SIZE;
+        }
+        current_pos.x = 0;
+        current_pos.y += ICON_UNIT_SIZE;
+    }
 }
 
-SDL_Renderer* get_renderer(){
-    return renderer;
-}
+
