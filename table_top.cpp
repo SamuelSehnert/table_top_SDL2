@@ -10,6 +10,8 @@
 #define BOARD_WIDTH ICON_UNIT_SIZE * 30
 #define BOARD_HEIGHT ICON_UNIT_SIZE * 30
 
+#define SIDEBAR_WIDTH  SCREEN_WIDTH - BOARD_WIDTH
+
 int main(){
     bool quit = false;
     SDL_Event event;
@@ -22,6 +24,12 @@ int main(){
 
     Piece player({0,0, ICON_UNIT_SIZE, ICON_UNIT_SIZE}, {255, 0,0,SDL_ALPHA_OPAQUE}, '@');
     Piece enemy({32,0, ICON_UNIT_SIZE, ICON_UNIT_SIZE}, {255, 0,0,SDL_ALPHA_OPAQUE}, 'T');
+
+    SDL_Rect side_bar;
+    side_bar.h = BOARD_HEIGHT;
+    side_bar.w = SIDEBAR_WIDTH;
+    side_bar.x = BOARD_WIDTH;
+    side_bar.y = 0;
 
     while (!quit){
         SDL_PollEvent(&event);
@@ -44,6 +52,8 @@ int main(){
             }
         }
         clear_render();
+        SDL_SetRenderDrawColor(get_renderer(), 0, 0, 255, 255);
+        SDL_RenderDrawRect(get_renderer(), &side_bar);
         show_floor(BOARD_WIDTH, BOARD_HEIGHT);
         player.add_to_render();
         enemy.add_to_render();
