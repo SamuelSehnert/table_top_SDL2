@@ -7,8 +7,11 @@
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 480
 
-#define BOARD_WIDTH ICON_UNIT_SIZE * 30
-#define BOARD_HEIGHT ICON_UNIT_SIZE * 30
+#define BOARD_HEIGHT_UNITS 30
+#define BOARD_WIDTH_UNITS 30
+
+#define BOARD_WIDTH ICON_UNIT_SIZE * BOARD_WIDTH_UNITS
+#define BOARD_HEIGHT ICON_UNIT_SIZE * BOARD_HEIGHT_UNITS
 
 #define SIDEBAR_WIDTH  SCREEN_WIDTH - BOARD_WIDTH
 
@@ -23,7 +26,7 @@ int main(){
     create_renderer();
 
     Piece player({0,0, ICON_UNIT_SIZE, ICON_UNIT_SIZE}, {255, 0,0,SDL_ALPHA_OPAQUE}, '@');
-    Piece enemy({32,0, ICON_UNIT_SIZE, ICON_UNIT_SIZE}, {255, 0,0,SDL_ALPHA_OPAQUE}, 'T');
+    Piece enemy({1,0, ICON_UNIT_SIZE, ICON_UNIT_SIZE}, {255, 0,0,SDL_ALPHA_OPAQUE}, 'T');
 
     SDL_Rect side_bar;
     side_bar.h = BOARD_HEIGHT;
@@ -38,17 +41,17 @@ int main(){
         }
         else if (event.type == SDL_KEYDOWN){
             SDL_Keycode key_code = event.key.keysym.sym;
-            if (key_code == SDLK_w && player.get_piece_pos().y - ICON_UNIT_SIZE >= 0){
-                player.set_piece_pos(player.get_piece_pos().x, player.get_piece_pos().y - ICON_UNIT_SIZE);
+            if (key_code == SDLK_w && player.get_piece_pos().y - 1 >= 0){
+                player.set_piece_pos(player.get_piece_pos().x, player.get_piece_pos().y - 1);
             }
-            if (key_code == SDLK_a && player.get_piece_pos().x - ICON_UNIT_SIZE >= 0){
-                player.set_piece_pos(player.get_piece_pos().x - ICON_UNIT_SIZE, player.get_piece_pos().y);
+            if (key_code == SDLK_a && player.get_piece_pos().x - 1 >= 0){
+                player.set_piece_pos(player.get_piece_pos().x - 1, player.get_piece_pos().y);
             }
-            if (key_code == SDLK_s && player.get_piece_pos().y + ICON_UNIT_SIZE < BOARD_HEIGHT){
-                player.set_piece_pos(player.get_piece_pos().x, player.get_piece_pos().y + ICON_UNIT_SIZE);
+            if (key_code == SDLK_s && player.get_piece_pos().y + 1 < BOARD_WIDTH_UNITS){
+                player.set_piece_pos(player.get_piece_pos().x, player.get_piece_pos().y + 1);
             }
-            if (key_code == SDLK_d && player.get_piece_pos().x + ICON_UNIT_SIZE < BOARD_WIDTH){
-                player.set_piece_pos(player.get_piece_pos().x + ICON_UNIT_SIZE, player.get_piece_pos().y);
+            if (key_code == SDLK_d && player.get_piece_pos().x + 1 < BOARD_WIDTH_UNITS){
+                player.set_piece_pos(player.get_piece_pos().x + 1, player.get_piece_pos().y);
             }
         }
         clear_render();

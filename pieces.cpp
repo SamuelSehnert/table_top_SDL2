@@ -34,7 +34,9 @@ void Piece::create_piece_texture(){
 
 void Piece::add_to_render(){
     SDL_Rect shifted_position = this->get_piece_pos();
+    shifted_position.x *= ICON_UNIT_SIZE;
     shifted_position.x += 3;
+    shifted_position.y *= ICON_UNIT_SIZE;
 
     SDL_RenderCopy(get_renderer(), this->piece_texture, NULL, &shifted_position);
 }
