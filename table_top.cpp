@@ -18,27 +18,20 @@
 
 std::vector<Floor> floor_vector;
 
-void show_floor_test(int max_width, int max_height){
-    //const char ch[2] = {'.', '\0'};
-    //SDL_Surface* floor_text = TTF_RenderText_Solid(get_font(), (const char*)ch, {255,255,255,255}); 
-    //SDL_Texture* texture = SDL_CreateTextureFromSurface(get_renderer(), floor_text);
-    //SDL_FreeSurface(floor_text);
-
+void init_floor(int max_width, int max_height){
     SDL_Rect current_pos;
     current_pos.h = current_pos.w = ICON_UNIT_SIZE;
-    current_pos.x = 3;
+    current_pos.x = 0;
     current_pos.y = 0;
 
-    for (int i = 0; i < max_height; i += ICON_UNIT_SIZE){
-        for (int j = 0; j < max_width; j += ICON_UNIT_SIZE){
-            //SDL_RenderCopy(get_renderer(), texture, NULL, &current_pos);
+    for (int i = 0; i < max_height; i += 1){
+        for (int j = 0; j < max_width; j += 1){
             Floor floor(current_pos, {255,255,255,255}, '.');
             floor_vector.push_back(floor);
-            floor.add_to_render();
-            current_pos.x += ICON_UNIT_SIZE;
+            current_pos.x += 1;
         }
         current_pos.x = 0;
-        current_pos.y += ICON_UNIT_SIZE;
+        current_pos.y += 1;
     }
 }
 
@@ -63,6 +56,10 @@ int main(){
     side_bar.x = BOARD_WIDTH;
     side_bar.y = 0;
 
+    init_floor(BOARD_WIDTH_UNITS, BOARD_HEIGHT_UNITS);
+
+    std::cout << "here" << std::endl;
+
     while (!quit){
         SDL_PollEvent(&event);
         if (event.type == SDL_QUIT){ //SDL quit includes DWM : alt, shift, c
@@ -86,10 +83,12 @@ int main(){
         clear_render();
         SDL_SetRenderDrawColor(get_renderer(), 0, 0, 255, SDL_ALPHA_OPAQUE);
         SDL_RenderDrawRect(get_renderer(), &side_bar);
-        show_floor(BOARD_WIDTH, BOARD_HEIGHT);
-        //show_floor_test(BOARD_WIDTH, BOARD_HEIGHT);
+        //show_floor(BOARD_WIDTH, BOARD_HEIGHT);
         player.add_to_render();
         enemy.add_to_render();
+        for (Floor& floor : floor_vector) {
+            floor.add_to_render();
+        }
         display_rendered_data();
     }
     close_everything();

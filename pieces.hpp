@@ -9,10 +9,10 @@ class Piece{
         char piece_icon;
         SDL_Rect piece_pos;
         SDL_Color icon_color;
-        //Tester
         SDL_Texture* piece_texture;
         void create_piece_texture();
 
+        Piece* onTop; // will act like a linked list to show what pieces are on top of others
 
     public:
         //Constructor
