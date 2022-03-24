@@ -35,7 +35,20 @@ void init_floor(int max_width, int max_height){
     }
 }
 
-
+void add_all_to_renderer(){
+    for (Floor& floor : floor_vector){
+        Piece* piece = &floor;
+        while (piece->get_on_top() != nullptr){
+            piece = piece->get_on_top();
+        }
+        if (piece == nullptr){
+            floor.add_to_render();
+        }
+        else{
+            piece->add_to_render();
+        }
+    }
+}
 
 int main(){
     bool quit = false;
@@ -47,18 +60,18 @@ int main(){
     create_window(SCREEN_WIDTH, SCREEN_HEIGHT);
     create_renderer();
 
+    init_floor(BOARD_WIDTH_UNITS, BOARD_HEIGHT_UNITS);
+
     Piece player({0,0, ICON_UNIT_SIZE, ICON_UNIT_SIZE}, {255, 0, 0, SDL_ALPHA_OPAQUE}, '@');
     Piece enemy({1,0, ICON_UNIT_SIZE, ICON_UNIT_SIZE}, {255, 0, 0, SDL_ALPHA_OPAQUE}, 'T');
+    floor_vector.at(0 + 0 * BOARD_WIDTH_UNITS).set_piece_on_top(&player);
+    floor_vector.at(1 + 0 * BOARD_WIDTH_UNITS).set_piece_on_top(&enemy);
 
     SDL_Rect side_bar;
     side_bar.h = BOARD_HEIGHT;
     side_bar.w = SIDEBAR_WIDTH;
     side_bar.x = BOARD_WIDTH;
     side_bar.y = 0;
-
-    init_floor(BOARD_WIDTH_UNITS, BOARD_HEIGHT_UNITS);
-
-    std::cout << "here" << std::endl;
 
     while (!quit){
         SDL_PollEvent(&event);
@@ -83,12 +96,12 @@ int main(){
         clear_render();
         SDL_SetRenderDrawColor(get_renderer(), 0, 0, 255, SDL_ALPHA_OPAQUE);
         SDL_RenderDrawRect(get_renderer(), &side_bar);
-        //show_floor(BOARD_WIDTH, BOARD_HEIGHT);
-        player.add_to_render();
-        enemy.add_to_render();
-        for (Floor& floor : floor_vector) {
-            floor.add_to_render();
-        }
+        add_all_to_renderer();
+        //player.add_to_render();
+        //enemy.add_to_render();
+        //for (Floor& floor : floor_vector) {
+        //    floor.add_to_render();
+        //}
         display_rendered_data();
     }
     close_everything();

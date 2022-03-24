@@ -1,1 +1,1 @@
-#define ICON_UNIT_SIZE 16
+#define ICON_UNIT_SIZE 32

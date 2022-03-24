@@ -22,9 +22,12 @@ class Piece{
         char get_piece_icon();
         SDL_Rect get_piece_pos();
         SDL_Color get_piece_color();
+        Piece* get_on_top();
 
         //Setters
         void set_piece_pos(int x, int y);
+        void set_piece_color(SDL_Color new_color);
+        void set_piece_on_top(Piece* piece);
 
         //SDL
         void add_to_render();

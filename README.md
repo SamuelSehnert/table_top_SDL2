@@ -8,3 +8,7 @@ If you want to compile and use this:
     2) run: make all
     3) then: ./table_top
     4) Should work?
+
+For my own santiy:
+    The next plan is to have the floor be an object with a pointer to whatever is on top
+    When I loop to print, I want to run up the chain of each floor obj and print whatever the topmost object is
