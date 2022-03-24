@@ -44,3 +44,15 @@ void Piece::add_to_render(){
 void Piece::close_texture(){
     SDL_DestroyTexture(this->piece_texture);
 }
+
+
+// ====================== Floor ====================== //
+Floor::Floor(SDL_Rect initial_pos, SDL_Color initial_color, char piece_icon)
+    : Piece(initial_pos, initial_color, piece_icon){
+        this->piece_pos = initial_pos;
+        this->icon_color = initial_color;
+        this->piece_icon = piece_icon;
+        create_piece_texture(); //Sets up the individual texture to render char
+    }
+
+

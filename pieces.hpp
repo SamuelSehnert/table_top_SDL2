@@ -1,11 +1,11 @@
 #include <string.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
-
+#include "shared.hpp"
 #include "SDL_Utils.hpp"
 
 class Piece{
-    private:
+    protected:
         char piece_icon;
         SDL_Rect piece_pos;
         SDL_Color icon_color;
@@ -31,6 +31,12 @@ class Piece{
         void close_texture();
 };
 
+//Active Pieces
 
+//Environmental Pieces
+class Floor : public Piece{
+    public:
+        Floor(SDL_Rect initial_pos, SDL_Color initial_color, char piece_icon);
+};
 
 
