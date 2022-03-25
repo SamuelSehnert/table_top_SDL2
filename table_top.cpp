@@ -80,9 +80,9 @@ int main(){
 
     init_floor(BOARD_WIDTH_UNITS, BOARD_HEIGHT_UNITS);
 
-    Piece player({0,0, ICON_UNIT_SIZE, ICON_UNIT_SIZE}, {255, 0, 0, SDL_ALPHA_OPAQUE}, '@');
+    Piece player({5,5, ICON_UNIT_SIZE, ICON_UNIT_SIZE}, {255, 0, 0, SDL_ALPHA_OPAQUE}, '@');
     Piece enemy({1,0, ICON_UNIT_SIZE, ICON_UNIT_SIZE}, {255, 0, 0, SDL_ALPHA_OPAQUE}, 'T');
-    floor_vector.at(0 + 0 * BOARD_WIDTH_UNITS).set_piece_on_top(&player);
+    floor_vector.at(5 + 5 * BOARD_WIDTH_UNITS).set_piece_on_top(&player);
     floor_vector.at(1 + 0 * BOARD_WIDTH_UNITS).set_piece_on_top(&enemy);
 
     SDL_Rect side_bar;
@@ -123,11 +123,9 @@ int main(){
             add_to_top(&floor_vector.at(player.get_piece_pos().x + player.get_piece_pos().y * BOARD_WIDTH_UNITS), &player);
         }
         clear_render();
-
         SDL_SetRenderDrawColor(get_renderer(), 0, 0, 255, SDL_ALPHA_OPAQUE);
         SDL_RenderDrawRect(get_renderer(), &side_bar);
         SDL_RenderDrawRect(get_renderer(), &piece_holder_side_bar);
-
         add_all_to_renderer();
         display_rendered_data();
     }
