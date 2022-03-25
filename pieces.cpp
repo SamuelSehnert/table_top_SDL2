@@ -3,10 +3,10 @@
 
 // ====================== Piece ====================== //
 
-Piece::Piece(SDL_Rect initial_pos, SDL_Color initial_color, char piece_icon){
+Piece::Piece(SDL_Rect initial_pos, SDL_Color initial_color){
     this->piece_pos = initial_pos;
     this->icon_color = initial_color;
-    this->piece_icon = piece_icon;
+    this->piece_icon = '\0';
     create_piece_texture(); //Sets up the individual texture to render char
     this->onTop = nullptr;
 }
@@ -54,13 +54,22 @@ void Piece::close_texture(){
     SDL_DestroyTexture(this->piece_texture);
 }
 
-
-// ====================== Floor ====================== //
-Floor::Floor(SDL_Rect initial_pos, SDL_Color initial_color, char piece_icon)
-    : Piece(initial_pos, initial_color, piece_icon){
+// ====================== Soldier ====================== //
+Soldier::Soldier(SDL_Rect initial_pos, SDL_Color initial_color)
+    : Piece(initial_pos, initial_color){
         this->piece_pos = initial_pos;
         this->icon_color = initial_color;
-        this->piece_icon = piece_icon;
+        this->piece_icon = 'S';
+        create_piece_texture(); //Sets up the individual texture to render char
+    }
+
+
+// ====================== Floor ====================== //
+Floor::Floor(SDL_Rect initial_pos, SDL_Color initial_color)
+    : Piece(initial_pos, initial_color){
+        this->piece_pos = initial_pos;
+        this->icon_color = initial_color;
+        this->piece_icon = '.';
         create_piece_texture(); //Sets up the individual texture to render char
     }
 

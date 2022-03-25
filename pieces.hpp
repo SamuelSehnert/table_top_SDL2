@@ -16,7 +16,7 @@ class Piece{
 
     public:
         //Constructor
-        Piece(SDL_Rect initial_pos, SDL_Color initial_color, char piece_icon);
+        Piece(SDL_Rect initial_pos, SDL_Color initial_color);
 
         //Getters
         char get_piece_icon();
@@ -35,11 +35,25 @@ class Piece{
 };
 
 //Active Pieces
+class Soldier : public Piece{
+    private:
+        int health;
+        int attack_range;
+        int movement_range;
+    public:
+        //Constructor
+        Soldier(SDL_Rect initial_pos, SDL_Color initial_color);
+
+        //Getters
+        int get_health(){ return this->health; }
+        int get_attack_range(){ return this->attack_range; }
+        int get_movement_range(){ return this->movement_range; }
+};
 
 //Environmental Pieces
 class Floor : public Piece{
     public:
-        Floor(SDL_Rect initial_pos, SDL_Color initial_color, char piece_icon);
+        Floor(SDL_Rect initial_pos, SDL_Color initial_color);
 };
 
 
