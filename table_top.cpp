@@ -14,7 +14,9 @@
 #define BOARD_WIDTH ICON_UNIT_SIZE * BOARD_WIDTH_UNITS
 #define BOARD_HEIGHT ICON_UNIT_SIZE * BOARD_HEIGHT_UNITS
 
-#define SIDEBAR_WIDTH  SCREEN_WIDTH - BOARD_WIDTH
+#define SIDEBAR_WIDTH SCREEN_WIDTH - BOARD_WIDTH
+
+#define MAX_PIECES 5
 
 std::vector<Floor> floor_vector;
 
@@ -57,6 +59,7 @@ void pop_off_top(Floor* floor){
     }
     piece->set_piece_on_top(nullptr);
 }
+
 void add_to_top(Floor* floor, Piece* to_place){
     Piece* piece = floor;
     while (piece->get_on_top() != nullptr){
@@ -88,6 +91,12 @@ int main(){
     side_bar.x = BOARD_WIDTH;
     side_bar.y = 0;
 
+    SDL_Rect piece_holder_side_bar;
+    piece_holder_side_bar.h = ICON_UNIT_SIZE;
+    piece_holder_side_bar.w = ICON_UNIT_SIZE * MAX_PIECES;
+    piece_holder_side_bar.x = SIDEBAR_WIDTH + (SIDEBAR_WIDTH / 2) - (ICON_UNIT_SIZE * MAX_PIECES / 2);
+    piece_holder_side_bar.y = ICON_UNIT_SIZE * 3;
+
     while (!quit){
         SDL_PollEvent(&event);
         if (event.type == SDL_QUIT){ //SDL quit includes DWM : alt, shift, c
@@ -114,8 +123,11 @@ int main(){
             add_to_top(&floor_vector.at(player.get_piece_pos().x + player.get_piece_pos().y * BOARD_WIDTH_UNITS), &player);
         }
         clear_render();
+
         SDL_SetRenderDrawColor(get_renderer(), 0, 0, 255, SDL_ALPHA_OPAQUE);
         SDL_RenderDrawRect(get_renderer(), &side_bar);
+        SDL_RenderDrawRect(get_renderer(), &piece_holder_side_bar);
+
         add_all_to_renderer();
         display_rendered_data();
     }
