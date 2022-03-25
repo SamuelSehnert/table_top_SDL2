@@ -50,6 +50,21 @@ void add_all_to_renderer(){
     }
 }
 
+void pop_off_top(Floor* floor){
+    Piece* piece = floor;
+    while (piece->get_on_top() != nullptr && piece->get_on_top()->get_on_top() != nullptr){
+        piece = piece->get_on_top();
+    }
+    piece->set_piece_on_top(nullptr);
+}
+void add_to_top(Floor* floor, Piece* to_place){
+    Piece* piece = floor;
+    while (piece->get_on_top() != nullptr){
+        piece = piece->get_on_top();
+    }
+    piece->set_piece_on_top(to_place);
+}
+
 int main(){
     bool quit = false;
     SDL_Event event;
@@ -80,6 +95,10 @@ int main(){
         }
         else if (event.type == SDL_KEYDOWN){
             SDL_Keycode key_code = event.key.keysym.sym;
+            if (key_code == SDLK_ESCAPE){
+                break;
+            }
+            pop_off_top(&floor_vector.at(player.get_piece_pos().x + player.get_piece_pos().y * BOARD_WIDTH_UNITS));
             if (key_code == SDLK_w && player.get_piece_pos().y - 1 >= 0){
                 player.set_piece_pos(player.get_piece_pos().x, player.get_piece_pos().y - 1);
             }
@@ -92,16 +111,12 @@ int main(){
             if (key_code == SDLK_d && player.get_piece_pos().x + 1 < BOARD_WIDTH_UNITS){
                 player.set_piece_pos(player.get_piece_pos().x + 1, player.get_piece_pos().y);
             }
+            add_to_top(&floor_vector.at(player.get_piece_pos().x + player.get_piece_pos().y * BOARD_WIDTH_UNITS), &player);
         }
         clear_render();
         SDL_SetRenderDrawColor(get_renderer(), 0, 0, 255, SDL_ALPHA_OPAQUE);
         SDL_RenderDrawRect(get_renderer(), &side_bar);
         add_all_to_renderer();
-        //player.add_to_render();
-        //enemy.add_to_render();
-        //for (Floor& floor : floor_vector) {
-        //    floor.add_to_render();
-        //}
         display_rendered_data();
     }
     close_everything();
