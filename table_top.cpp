@@ -43,12 +43,7 @@ void add_all_to_renderer(){
         while (piece->get_on_top() != nullptr){
             piece = piece->get_on_top();
         }
-        if (piece == nullptr){
-            floor.add_to_render();
-        }
-        else{
-            piece->add_to_render();
-        }
+        piece->add_to_render();
     }
 }
 
