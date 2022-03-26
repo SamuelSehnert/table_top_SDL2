@@ -1,7 +1,7 @@
 #Makefile for table_top.cpp
 
 CC     = g++
-CFLAGS = -Wall -Wextra -g
+CFLAGS = -Wall -Wextra -ggdb
 LIBS   += -lSDL2 -lSDL2main -lSDL2_ttf
 
 SRC    = SDL_Utils.cpp pieces.cpp

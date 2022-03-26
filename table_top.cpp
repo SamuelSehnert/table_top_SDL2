@@ -23,7 +23,6 @@
 #define PIECE_HOLD_SIDE_BAR_X_START SIDEBAR_WIDTH + (SIDEBAR_WIDTH / 2) - (ICON_UNIT_SIZE * MAX_PIECES / 2)
 #define PIECE_HOLD_SIDE_BAR_Y_START ICON_UNIT_SIZE * 3
 
-
 std::vector<Floor> floor_vector;
 std::vector<Piece> piece_vector;
 
@@ -81,7 +80,7 @@ void set_up_pieces_on_hold(){
 
 void show_pieces_on_hold(){
     for (Piece& piece : piece_vector){
-//        std::cout << "id: " << piece.get_piece_icon() << std::endl;
+        std::cout << "id: " << piece.get_piece_icon() << std::endl;
         piece.add_to_render();
     }
 }
@@ -110,11 +109,11 @@ int main(){
     piece_holder_side_bar.x = PIECE_HOLD_SIDE_BAR_X_START;
     piece_holder_side_bar.y = PIECE_HOLD_SIDE_BAR_Y_START;
 
-    Soldier soldier1({32,32,0,0}, {0, 255, 255, 255});
-    Piece piece({32,32,0,1},{0,255,0,255});
+    Soldier soldier1({32,32,0,0}, {0, 255, 0, 255});
+    //Piece piece({32,32,0,1},{0,255,0,255});
     piece_vector.push_back(soldier1);
-    floor_vector.at(5 + 5 * BOARD_WIDTH_UNITS).set_piece_on_top(&soldier1);
-    floor_vector.at(0 + 1 * BOARD_WIDTH_UNITS).set_piece_on_top(&piece);
+    floor_vector.at(0 + 0 * BOARD_WIDTH_UNITS).set_piece_on_top(&soldier1);
+    //floor_vector.at(0 + 1 * BOARD_WIDTH_UNITS).set_piece_on_top(&piece);
 
     while (!quit){
         SDL_PollEvent(&event);
@@ -126,12 +125,15 @@ int main(){
             if (key_code == SDLK_ESCAPE){
                 break;
             }
+            if (key_code == SDLK_0){
+                std::cout << "Soldier: " << soldier1.get_piece_icon() << std::endl;
+            }
        }
         clear_render();
         SDL_SetRenderDrawColor(get_renderer(), 0, 0, 255, SDL_ALPHA_OPAQUE);
         SDL_RenderDrawRect(get_renderer(), &side_bar);
         SDL_RenderDrawRect(get_renderer(), &piece_holder_side_bar);
-        show_pieces_on_hold();
+        //show_pieces_on_hold();
         add_all_to_renderer();
         display_rendered_data();
     }
