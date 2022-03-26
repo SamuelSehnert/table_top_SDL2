@@ -80,7 +80,6 @@ void set_up_pieces_on_hold(){
 
 void show_pieces_on_hold(){
     for (Piece& piece : piece_vector){
-        std::cout << "id: " << piece.get_piece_icon() << std::endl;
         piece.add_to_render();
     }
 }
@@ -110,10 +109,8 @@ int main(){
     piece_holder_side_bar.y = PIECE_HOLD_SIDE_BAR_Y_START;
 
     Soldier soldier1({32,32,0,0}, {0, 255, 0, 255});
-    //Piece piece({32,32,0,1},{0,255,0,255});
     piece_vector.push_back(soldier1);
     floor_vector.at(0 + 0 * BOARD_WIDTH_UNITS).set_piece_on_top(&soldier1);
-    //floor_vector.at(0 + 1 * BOARD_WIDTH_UNITS).set_piece_on_top(&piece);
 
     while (!quit){
         SDL_PollEvent(&event);
